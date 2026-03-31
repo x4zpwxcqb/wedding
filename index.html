@@ -316,7 +316,7 @@
     // Автозапуск музыки
     window.addEventListener('load', () => {
         setTimeout(() => {
-            audio.volume = 0.4; // тихий старт
+            audio.volume = 0.1; // тихий старт
             audio.play().then(() => {
                 isPlaying = true;
                 musicIcon.classList.remove('fa-music');
