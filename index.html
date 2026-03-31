@@ -374,7 +374,6 @@
             }
             initForm();
 
-            // ----- ФУНКЦИИ ОТПРАВКИ НА GOOGLE APPS SCRIPT (CORS обход через mode: 'no-cors') -----
             function collectFormData() {
                 const name = nameInput.value.trim();
                 const attendingRadio = document.querySelector('input[name="attending"]:checked');
@@ -402,7 +401,6 @@
             }
 
             async function sendToTelegram(formData) {
-                // ЗАМЕНИТЕ ЭТОТ URL НА СВОЙ (из Google Apps Script)
                 const SERVER_URL = 'https://script.google.com/macros/s/AKfycby_Ce0nz4ZYmp-iCP5avCf_8EgZVKLHQWPfNQQQ_CbtCt7e6AaUbq6PjBdCm_KFyN3x/exec';
 
                 const encodedData = new URLSearchParams(formData).toString();
@@ -439,24 +437,21 @@
                 submitBtn.textContent = 'Отправить ответ';
 
                 if (result.success) {
-                    // Разные сообщения в зависимости от ответа
-                    const isAttending = formData.attending === 'yes';
-                    const thankYouHtml = isAttending ? `
+                    let messageText = '';
+                    if (formData.attending === 'yes') {
+                        messageText = `<p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>`;
+                    } else {
+                        messageText = `<p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>`;
+                    }
+
+                    container.innerHTML = `
                         <div id="thank-you-message" class="text-center py-16 px-4">
                             <div class="text-7xl mb-6 animate-bounce">❤️</div>
                             <h2 class="heading-font text-5xl mb-4 text-[#d4a5b8]">Спасибо, ${formData.name}!</h2>
                             <p class="text-2xl text-gray-700 mb-4">Ваш ответ успешно отправлен</p>
-                            <p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>
-                        </div>
-                    ` : `
-                        <div id="thank-you-message" class="text-center py-16 px-4">
-                            <div class="text-7xl mb-6">🌸</div>
-                            <h2 class="heading-font text-5xl mb-4 text-[#d4a5b8]">Спасибо, ${formData.name}!</h2>
-                            <p class="text-2xl text-gray-700 mb-4">Ваш ответ успешно отправлен</p>
-                            <p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>
+                            ${messageText}
                         </div>
                     `;
-                    container.innerHTML = thankYouHtml;
                     const thankDiv = document.getElementById('thank-you-message');
                     if (thankDiv) setTimeout(() => thankDiv.classList.add('show'), 20);
                 } else {
