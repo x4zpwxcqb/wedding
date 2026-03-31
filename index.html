@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-      
+     
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #fce7f3; }
         .heading-font { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em; }
-      
+     
         .hero-bg {
             background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%),
                         #f9d8e8;
             background-color: #f9d8e8;
         }
-      
+     
         .main-bg {
             background-color: #fef6f9;
             background-image:
@@ -26,14 +26,14 @@
                 radial-gradient(circle at 85% 70%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 40% 85%, rgba(180, 83, 120, 0.05) 0%, transparent 40%);
         }
-      
+     
         .countdown-box {
             background: rgba(255,255,255,0.96);
             backdrop-filter: blur(2px);
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
             border-radius: 1.75rem;
         }
-      
+     
         .flower { animation: float 5s ease-in-out infinite; will-change: transform; }
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -63,6 +63,39 @@
             background: #d4a5b8;
         }
 
+        /* Улучшенная навигация для мобильных */
+        nav {
+            padding: 12px 0;
+        }
+        nav .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            gap: 12px;
+        }
+        nav .nav-title {
+            font-size: 1.15rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        nav .menu-items {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+            flex-shrink: 1;
+            min-width: 0;
+        }
+        nav .menu-items::-webkit-scrollbar {
+            display: none;
+        }
+        nav a {
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -75,36 +108,30 @@
 
 <!-- HERO СЕКЦИЯ -->
 <header class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-
     <!-- Эмодзи -->
     <div class="absolute top-6 left-6 text-4xl flower z-10" style="animation-delay: 0.1s;">🌸</div>
     <div class="absolute top-8 left-1/4 text-3xl flower z-10" style="animation-delay: 1.6s;">✨</div>
     <div class="absolute top-5 left-1/2 text-2xl flower z-10" style="animation-delay: 2.9s;">💫</div>
     <div class="absolute top-10 left-3/4 text-4xl flower z-10" style="animation-delay: 0.7s;">💒</div>
     <div class="absolute top-6 right-6 text-4xl flower z-10" style="animation-delay: 2.3s;">💐</div>
-
     <div class="absolute top-20 left-1/5 text-3xl flower z-10" style="animation-delay: 1.2s;">🌷</div>
     <div class="absolute top-16 right-1/4 text-4xl flower z-10" style="animation-delay: 3.4s;">🌹</div>
-
     <div class="absolute top-1/4 left-6 text-5xl flower z-10" style="animation-delay: 0.4s;">🕊️</div>
     <div class="absolute top-1/3 left-12 text-3xl flower z-10" style="animation-delay: 2.7s;">🌺</div>
     <div class="absolute top-1/2 left-10 text-4xl flower z-10" style="animation-delay: 1.1s;">💞</div>
     <div class="absolute bottom-1/3 left-8 text-3xl flower z-10" style="animation-delay: 3.2s;">🍃</div>
     <div class="absolute bottom-1/4 left-16 text-4xl flower z-10" style="animation-delay: 0.8s;">🎀</div>
-
     <div class="absolute top-1/4 right-10 text-4xl flower z-10" style="animation-delay: 1.8s;">👰</div>
     <div class="absolute top-2/5 right-16 text-3xl flower z-10" style="animation-delay: 3.5s;">❤️</div>
     <div class="absolute top-3/4 right-12 text-5xl flower z-10" style="animation-delay: 0.5s;">💕</div>
     <div class="absolute bottom-1/3 right-14 text-4xl flower z-10" style="animation-delay: 2.1s;">🥂</div>
     <div class="absolute bottom-20 right-16 text-3xl flower z-10" style="animation-delay: 1.4s;">🔔</div>
-
     <div class="absolute bottom-32 left-10 text-5xl flower z-10" style="animation-delay: 0.3s;">💍</div>
     <div class="absolute bottom-24 left-1/3 text-4xl flower z-10" style="animation-delay: 2.5s;">💖</div>
     <div class="absolute bottom-36 left-1/2 text-3xl flower z-10" style="animation-delay: 3.7s;">🌼</div>
     <div class="absolute bottom-28 left-2/3 text-4xl flower z-10" style="animation-delay: 1.3s;">🌸</div>
     <div class="absolute bottom-32 right-1/4 text-5xl flower z-10" style="animation-delay: 0.9s;">🤵</div>
     <div class="absolute bottom-16 right-1/3 text-4xl flower z-10" style="animation-delay: 2.8s;">💐</div>
-
     <div class="absolute top-28 left-1/3 text-3xl flower z-10" style="animation-delay: 1.9s;">🌺</div>
     <div class="absolute top-40 right-1/3 text-4xl flower z-10" style="animation-delay: 3.1s;">✨</div>
     <div class="absolute bottom-44 left-1/4 text-3xl flower z-10" style="animation-delay: 0.6s;">💞</div>
@@ -114,7 +141,7 @@
     <div class="text-center z-20 px-5 max-w-md mx-auto w-full">
         <h1 class="heading-font text-5xl leading-none mb-3 drop-shadow-sm">Никита <span class="text-[#fbc4d4]">&amp;</span> Эльвина</h1>
         <p class="text-2xl font-light mb-8 tracking-wide">14 августа 2026</p>
-       
+      
         <div class="countdown-box mx-auto max-w-xs rounded-3xl p-5 mb-8">
             <p class="uppercase text-[#b56786] text-xs tracking-[0.15em] font-semibold mb-4">До свадьбы осталось</p>
             <div id="countdown" class="grid grid-cols-4 gap-3 text-center">
@@ -124,7 +151,7 @@
                 <div><div id="seconds" class="text-3xl font-bold text-gray-900 heading-font">00</div><div class="text-[10px] text-gray-500 mt-1">секунд</div></div>
             </div>
         </div>
-       
+      
         <div class="flex flex-col gap-3 px-2">
             <a href="#schedule" class="inline-block bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-[#d4a5b8] hover:text-white transition-all px-6 py-3.5 rounded-2xl text-base font-medium flex items-center justify-center gap-2 shadow-md">
                 <i class="fa-solid fa-calendar"></i> Расписание
@@ -142,18 +169,19 @@
     </div>
 </header>
 
-<!-- НАВИГАЦИЯ -->
+<!-- ИСПРАВЛЕННАЯ НАВИГАЦИЯ -->
 <nav class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-pink-100">
-    <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-        <div class="flex items-center gap-2">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 nav-container">
+        <div class="flex items-center gap-2 flex-shrink-0">
             <span class="text-2xl">💍</span>
-            <span class="heading-font text-lg tracking-tight">Никита &amp; Эльвина</span>
+            <span class="heading-font nav-title text-lg tracking-tight">Никита &amp; Эльвина</span>
         </div>
-        <div class="flex gap-4 text-sm font-medium">
-            <a href="#schedule" class="hover:text-[#d4a5b8]">Расписание</a>
-            <a href="#dresscode" class="hover:text-[#d4a5b8]">Дресс-код</a>
-            <a href="#gifts" class="hover:text-[#d4a5b8]">Подарки</a>
-            <a href="#rsvp" class="hover:text-[#d4a5b8]">Анкета</a>
+        
+        <div class="menu-items flex gap-5 text-sm font-medium whitespace-nowrap overflow-x-auto pb-1">
+            <a href="#schedule" class="hover:text-[#d4a5b8] transition-colors">Расписание</a>
+            <a href="#dresscode" class="hover:text-[#d4a5b8] transition-colors">Дресс-код</a>
+            <a href="#gifts" class="hover:text-[#d4a5b8] transition-colors">Подарки</a>
+            <a href="#rsvp" class="hover:text-[#d4a5b8] transition-colors">Анкета</a>
         </div>
     </div>
 </nav>
@@ -180,6 +208,7 @@
             <div class="text-3xl font-bold text-[#d4a5b8]">16:00</div>
             <div>
                 <h3 class="text-lg font-medium">Фуршет в Усадьбе Шелепаново</h3>
+                <p class="text-gray-600 mt-1 text-sm">Московская область, городской округ Солнечногорск, д. Шелепаново</p>
                 <a href="https://yandex.ru/maps/org/usadba_shelepanovo/12791297215/" target="_blank" class="inline-flex items-center gap-2 mt-4 text-[#d4a5b8] hover:underline text-sm"><i class="fa-solid fa-map-marker-alt"></i> Открыть на Яндекс.Картах</a>
             </div>
         </div>
@@ -236,7 +265,7 @@
         <div id="rsvp-container" class="bg-white rounded-3xl shadow-2xl p-8">
             <h2 class="heading-font text-4xl text-center mb-2">Подтвердите участие</h2>
             <p class="text-center text-gray-500 mb-8 text-sm">Пожалуйста, ответьте до 1 мая 2026</p>
-          
+         
             <form id="rsvp-form" class="space-y-6">
                 <div class="question-block">
                     <label class="block text-sm font-semibold mb-2">Как вас зовут? <span class="text-red-500">*</span></label>
@@ -305,7 +334,6 @@
 <!-- Музыка -->
 <audio id="background-music" loop>
     <source src="https://files.catbox.moe/9sofur.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает воспроизведение аудио.
 </audio>
 
 <script>
@@ -313,17 +341,14 @@
     const musicIcon = document.getElementById('music-icon');
     let isPlaying = false;
 
-    // Автозапуск музыки
     window.addEventListener('load', () => {
         setTimeout(() => {
-            audio.volume = 0.05; // тихий старт
+            audio.volume = 0.4;
             audio.play().then(() => {
                 isPlaying = true;
                 musicIcon.classList.remove('fa-music');
                 musicIcon.classList.add('fa-pause');
-            }).catch(() => {
-                console.log("Автовоспроизведение заблокировано браузером");
-            });
+            }).catch(() => {});
         }, 1200);
     });
 
@@ -340,7 +365,7 @@
         isPlaying = !isPlaying;
     }
 
-    // Таймер + Форма
+    // Таймер и форма
     (function() {
         function startCountdown() {
             const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
@@ -386,7 +411,7 @@
                 submitBtn.disabled = !(name !== '' && transferSelected && alcoholSelected && allergyFilled);
             }
         }
-      
+     
         function toggleExtraFields() {
             let selected = null;
             for (let radio of attendingRadios) if (radio.checked) { selected = radio.value; break; }
@@ -406,16 +431,16 @@
             }
             validateForm();
         }
-      
+     
         nameInput.addEventListener('input', validateForm);
         attendingRadios.forEach(radio => radio.addEventListener('change', () => { toggleExtraFields(); validateForm(); }));
-      
+     
         function bindDynamicValidation() {
             transferChecks().forEach(cb => cb.addEventListener('change', validateForm));
             alcoholChecks().forEach(cb => cb.addEventListener('change', validateForm));
             if (allergyTextarea) allergyTextarea.addEventListener('input', validateForm);
         }
-      
+     
         function initForm() {
             extraWrapper.style.display = 'none';
             transferChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
@@ -476,7 +501,7 @@
             submitBtn.disabled = false;
             submitBtn.textContent = 'Отправить ответ';
             if (result.success) {
-                let messageText = formData.attending === 'yes' 
+                let messageText = formData.attending === 'yes'
                     ? `<p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>`
                     : `<p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>`;
                 container.innerHTML = `
