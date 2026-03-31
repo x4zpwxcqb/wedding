@@ -63,7 +63,7 @@
             background: #d4a5b8;
         }
 
-        /* Улучшенная навигация для мобильных */
+        /* Улучшенная навигация */
         nav {
             padding: 12px 0;
         }
@@ -79,14 +79,18 @@
             white-space: nowrap;
             flex-shrink: 0;
         }
+        nav .menu-wrapper {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+        }
         nav .menu-items {
             display: flex;
             gap: 16px;
             overflow-x: auto;
             padding-bottom: 4px;
             scrollbar-width: none;
-            flex-shrink: 1;
-            min-width: 0;
+            white-space: nowrap;
         }
         nav .menu-items::-webkit-scrollbar {
             display: none;
@@ -94,6 +98,25 @@
         nav a {
             white-space: nowrap;
             font-size: 0.95rem;
+        }
+
+        /* Стрелочки для прокрутки */
+        .scroll-hint {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            color: #d4a5b8;
+            pointer-events: none;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+        .scroll-hint.left  { left: 4px; }
+        .scroll-hint.right { right: 4px; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         html { scroll-behavior: smooth; }
@@ -108,7 +131,7 @@
 
 <!-- HERO СЕКЦИЯ -->
 <header class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-    <!-- Эмодзи -->
+    <!-- Эмодзи (оставлены без изменений) -->
     <div class="absolute top-6 left-6 text-4xl flower z-10" style="animation-delay: 0.1s;">🌸</div>
     <div class="absolute top-8 left-1/4 text-3xl flower z-10" style="animation-delay: 1.6s;">✨</div>
     <div class="absolute top-5 left-1/2 text-2xl flower z-10" style="animation-delay: 2.9s;">💫</div>
@@ -169,7 +192,7 @@
     </div>
 </header>
 
-<!-- ИСПРАВЛЕННАЯ НАВИГАЦИЯ -->
+<!-- НАВИГАЦИЯ С СТРЕЛОЧКАМИ -->
 <nav class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-pink-100">
     <div class="max-w-6xl mx-auto px-4 py-3.5 nav-container">
         <div class="flex items-center gap-2 flex-shrink-0">
@@ -177,11 +200,19 @@
             <span class="heading-font nav-title text-lg tracking-tight">Никита &amp; Эльвина</span>
         </div>
         
-        <div class="menu-items flex gap-5 text-sm font-medium whitespace-nowrap overflow-x-auto pb-1">
-            <a href="#schedule" class="hover:text-[#d4a5b8] transition-colors">Расписание</a>
-            <a href="#dresscode" class="hover:text-[#d4a5b8] transition-colors">Дресс-код</a>
-            <a href="#gifts" class="hover:text-[#d4a5b8] transition-colors">Подарки</a>
-            <a href="#rsvp" class="hover:text-[#d4a5b8] transition-colors">Анкета</a>
+        <div class="menu-wrapper relative flex-1">
+            <!-- Левая стрелочка -->
+            <div class="scroll-hint left">‹</div>
+            
+            <div class="menu-items flex gap-5 text-sm font-medium whitespace-nowrap overflow-x-auto pb-1">
+                <a href="#schedule" class="hover:text-[#d4a5b8] transition-colors">Расписание</a>
+                <a href="#dresscode" class="hover:text-[#d4a5b8] transition-colors">Дресс-код</a>
+                <a href="#gifts" class="hover:text-[#d4a5b8] transition-colors">Подарки</a>
+                <a href="#rsvp" class="hover:text-[#d4a5b8] transition-colors">Анкета</a>
+            </div>
+            
+            <!-- Правая стрелочка -->
+            <div class="scroll-hint right">›</div>
         </div>
     </div>
 </nav>
@@ -259,7 +290,7 @@
     </div>
 </section>
 
-<!-- АНКЕТА ПОДТВЕРЖДЕНИЯ -->
+<!-- АНКЕТА -->
 <section id="rsvp" class="py-12 bg-gradient-to-b from-[#f8f1f3] to-[#fce7f3]">
     <div class="max-w-lg mx-auto px-4">
         <div id="rsvp-container" class="bg-white rounded-3xl shadow-2xl p-8">
@@ -343,7 +374,7 @@
 
     window.addEventListener('load', () => {
         setTimeout(() => {
-            audio.volume = 0.4;
+            audio.volume = 0.05;   // ← по твоему запросу
             audio.play().then(() => {
                 isPlaying = true;
                 musicIcon.classList.remove('fa-music');
