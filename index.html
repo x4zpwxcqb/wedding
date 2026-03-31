@@ -87,7 +87,7 @@
             display: flex;
             gap: 18px;
             overflow-x: auto;
-            padding: 0 28px 4px 8px;   /* отступы для стрелок */
+            padding: 0 24px 4px 12px;   /* увеличен левый отступ */
             scrollbar-width: none;
             white-space: nowrap;
         }
@@ -99,19 +99,18 @@
             font-size: 0.95rem;
         }
 
-        /* Стрелочки */
+        /* Стрелочки — исправлено перекрытие */
         .scroll-hint {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: #d4a5b8;
-            opacity: 0.6;
+            opacity: 0.55;
             pointer-events: none;
             z-index: 10;
-            transition: opacity 0.3s;
         }
-        .scroll-hint.left  { left: 2px; }
+        .scroll-hint.left  { left: -4px; }   /* сдвинуто влево */
         .scroll-hint.right { right: 2px; }
 
         html { scroll-behavior: smooth; }
@@ -196,7 +195,7 @@
         </div>
         
         <div class="menu-wrapper relative flex-1">
-            <!-- Левая стрелочка -->
+            <!-- Левая стрелочка (исправлено перекрытие) -->
             <div class="scroll-hint left">‹</div>
             
             <div class="menu-items flex gap-5 text-sm font-medium whitespace-nowrap overflow-x-auto pb-1">
@@ -369,7 +368,7 @@
 
     window.addEventListener('load', () => {
         setTimeout(() => {
-            audio.volume = 0.05;   // ← по твоему запросу
+            audio.volume = 0.05;
             audio.play().then(() => {
                 isPlaying = true;
                 musicIcon.classList.remove('fa-music');
@@ -391,7 +390,7 @@
         isPlaying = !isPlaying;
     }
 
-    // Таймер и форма (без изменений)
+    // Таймер и форма
     (function() {
         function startCountdown() {
             const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
