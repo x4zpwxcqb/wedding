@@ -231,7 +231,7 @@
     </div>
 </section>
 
-<!-- АНКЕТА -->
+<!-- АНКЕТА ПОДТВЕРЖДЕНИЯ -->
 <section id="rsvp" class="py-12 bg-gradient-to-b from-[#f8f1f3] to-[#fce7f3]">
     <div class="max-w-lg mx-auto px-4">
         <div id="rsvp-container" class="bg-white rounded-3xl shadow-2xl p-8">
@@ -305,18 +305,19 @@
 
 <!-- Музыка -->
 <audio id="background-music" loop>
-    <source src="https://disk.yandex.ru/d/VM1I-Rh6M3H5FQ" type="audio/mpeg">
+    <source src="https://files.catbox.moe/9sofur.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает воспроизведение аудио.
 </audio>
 
 <script>
     const audio = document.getElementById('background-music');
-    const musicBtn = document.getElementById('music-btn');
     const musicIcon = document.getElementById('music-icon');
     let isPlaying = false;
 
     // Автозапуск музыки
     window.addEventListener('load', () => {
         setTimeout(() => {
+            audio.volume = 0.4; // тихий старт
             audio.play().then(() => {
                 isPlaying = true;
                 musicIcon.classList.remove('fa-music');
@@ -324,7 +325,7 @@
             }).catch(() => {
                 console.log("Автовоспроизведение заблокировано браузером");
             });
-        }, 1000);
+        }, 1200);
     });
 
     function toggleMusic() {
@@ -340,7 +341,7 @@
         isPlaying = !isPlaying;
     }
 
-    // Таймер + форма (полная версия)
+    // Таймер + Форма
     (function() {
         function startCountdown() {
             const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
@@ -458,7 +459,6 @@
                 });
                 return { success: true };
             } catch (error) {
-                console.error('Ошибка:', error);
                 return { success: false };
             }
         }
