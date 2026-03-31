@@ -40,54 +40,43 @@
             50% { transform: translateY(-12px) rotate(2deg); }
         }
 
+        /* Кнопка музыки */
+        #music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            background: rgba(212, 165, 184, 0.95);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        #music-btn:hover {
+            transform: scale(1.1);
+            background: #d4a5b8;
+        }
+
         html { scroll-behavior: smooth; }
-
-        /* === Адаптация специально под iPhone 6 (1334×750) === */
-        @media (max-width: 375px) {
-            .hero-bg h1 {
-                font-size: 2.35rem !important;
-                line-height: 1.05;
-            }
-            .hero-bg p {
-                font-size: 1.5rem !important;
-            }
-            .flower {
-                font-size: 1.8rem !important;
-            }
-            .absolute {
-                transform: scale(0.78);
-            }
-            #countdown > div > div:first-child {
-                font-size: 1.8rem !important;
-            }
-            .countdown-box {
-                padding: 1.1rem !important;
-            }
-            .btn-primary {
-                padding: 14px !important;
-                font-size: 1.05rem !important;
-            }
-        }
-
-        .question-block { margin-bottom: 1.75rem; transition: all 0.2s; }
-      
-        .color-swatch {
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-        }
-        .color-swatch:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 18px 28px -8px rgba(0,0,0,0.15);
-        }
-        section { scroll-margin-top: 60px; }
     </style>
 </head>
 <body class="main-bg text-gray-800">
 
+<!-- Кнопка управления музыкой -->
+<button id="music-btn" onclick="toggleMusic()">
+    <i class="fa-solid fa-music text-2xl" id="music-icon"></i>
+</button>
+
 <!-- HERO СЕКЦИЯ -->
 <header class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
 
-    <!-- Эмодзи адаптированы под маленький экран -->
+    <!-- Эмодзи -->
     <div class="absolute top-6 left-6 text-4xl flower z-10" style="animation-delay: 0.1s;">🌸</div>
     <div class="absolute top-8 left-1/4 text-3xl flower z-10" style="animation-delay: 1.6s;">✨</div>
     <div class="absolute top-5 left-1/2 text-2xl flower z-10" style="animation-delay: 2.9s;">💫</div>
@@ -232,7 +221,7 @@
             <div class="text-base leading-relaxed text-gray-700 space-y-4">
                 <p>Самый ценный подарок для нас — ваше присутствие и тёплые слова в этот особенный день.</p>
                 <p>Мы очень ценим Вашу заботу и будем рады любому подарку! И не важно, в какой конверт Вы его упакуете :)</p>
-                <p>Просим не дарить цветы — нам будет гораздо приятнее получить ваши искренние пожелания и улыбки.</p>
+                <p class="font-medium">Просим не дарить цветы — нам будет гораздо приятнее получить ваши искренние пожелания и улыбки.</p>
             </div>
         </div>
         <div>
@@ -242,7 +231,7 @@
     </div>
 </section>
 
-<!-- АНКЕТА ПОДТВЕРЖДЕНИЯ -->
+<!-- АНКЕТА -->
 <section id="rsvp" class="py-12 bg-gradient-to-b from-[#f8f1f3] to-[#fce7f3]">
     <div class="max-w-lg mx-auto px-4">
         <div id="rsvp-container" class="bg-white rounded-3xl shadow-2xl p-8">
@@ -252,9 +241,7 @@
             <form id="rsvp-form" class="space-y-6">
                 <div class="question-block">
                     <label class="block text-sm font-semibold mb-2">Как вас зовут? <span class="text-red-500">*</span></label>
-                    <input type="text" id="guest-name" required
-                           class="w-full px-5 py-3.5 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#d4a5b8] focus:ring-2 focus:ring-[#d4a5b8]/20 transition"
-                           placeholder="Имя и фамилия">
+                    <input type="text" id="guest-name" required class="w-full px-5 py-3.5 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#d4a5b8]" placeholder="Имя и фамилия">
                 </div>
                 <div class="question-block">
                     <label class="block text-sm font-semibold mb-3">Вы придёте на нашу свадьбу? <span class="text-red-500">*</span></label>
@@ -303,8 +290,7 @@
                         <textarea id="allergy-text" rows="3" class="w-full px-5 py-3.5 border rounded-2xl focus:outline-none focus:border-[#d4a5b8]" placeholder="Напишите, если есть аллергия / предпочтения, или укажите 'Нет'"></textarea>
                     </div>
                 </div>
-                <button type="submit" id="submit-rsvp-btn" disabled
-                        class="w-full bg-[#d4a5b8] hover:bg-[#bb7f9b] text-white py-4 rounded-3xl text-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md btn-primary">
+                <button type="submit" id="submit-rsvp-btn" disabled class="w-full bg-[#d4a5b8] hover:bg-[#bb7f9b] text-white py-4 rounded-3xl text-lg font-medium transition-all disabled:opacity-50">
                     Отправить ответ
                 </button>
             </form>
@@ -317,9 +303,45 @@
     Telegram: <a href="https://t.me/lamoolli" target="_blank" class="underline font-medium">@lamoolli</a></p>
 </div>
 
+<!-- Музыка -->
+<audio id="background-music" loop>
+    <source src="https://disk.yandex.ru/d/VM1I-Rh6M3H5FQ" type="audio/mpeg">
+</audio>
+
 <script>
+    const audio = document.getElementById('background-music');
+    const musicBtn = document.getElementById('music-btn');
+    const musicIcon = document.getElementById('music-icon');
+    let isPlaying = false;
+
+    // Автозапуск музыки
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            audio.play().then(() => {
+                isPlaying = true;
+                musicIcon.classList.remove('fa-music');
+                musicIcon.classList.add('fa-pause');
+            }).catch(() => {
+                console.log("Автовоспроизведение заблокировано браузером");
+            });
+        }, 1000);
+    });
+
+    function toggleMusic() {
+        if (isPlaying) {
+            audio.pause();
+            musicIcon.classList.remove('fa-pause');
+            musicIcon.classList.add('fa-music');
+        } else {
+            audio.play();
+            musicIcon.classList.remove('fa-music');
+            musicIcon.classList.add('fa-pause');
+        }
+        isPlaying = !isPlaying;
+    }
+
+    // Таймер + форма (полная версия)
     (function() {
-        // Таймер
         function startCountdown() {
             const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
             const interval = setInterval(() => {
@@ -327,10 +349,6 @@
                 const distance = weddingDate - now;
                 if (distance < 0) {
                     clearInterval(interval);
-                    document.getElementById('days').textContent = '000';
-                    document.getElementById('hours').textContent = '00';
-                    document.getElementById('minutes').textContent = '00';
-                    document.getElementById('seconds').textContent = '00';
                     return;
                 }
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -345,7 +363,6 @@
         }
         startCountdown();
 
-        // Форма
         const nameInput = document.getElementById('guest-name');
         const attendingRadios = document.querySelectorAll('input[name="attending"]');
         const extraWrapper = document.getElementById('extra-questions-wrapper');
@@ -442,7 +459,7 @@
                 return { success: true };
             } catch (error) {
                 console.error('Ошибка:', error);
-                return { success: false, error: error.message };
+                return { success: false };
             }
         }
 
@@ -460,12 +477,9 @@
             submitBtn.disabled = false;
             submitBtn.textContent = 'Отправить ответ';
             if (result.success) {
-                let messageText = '';
-                if (formData.attending === 'yes') {
-                    messageText = `<p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>`;
-                } else {
-                    messageText = `<p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>`;
-                }
+                let messageText = formData.attending === 'yes' 
+                    ? `<p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>`
+                    : `<p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>`;
                 container.innerHTML = `
                     <div id="thank-you-message" class="text-center py-16 px-4">
                         <div class="text-7xl mb-6 animate-bounce">❤️</div>
