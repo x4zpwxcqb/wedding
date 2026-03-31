@@ -140,14 +140,14 @@
                 <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">12:30</div>
                 <div><h3 class="text-2xl font-medium">Сбор гостей (рекомендуем приехать за 30 минут до церемонии)</h3></div>
             </div>
-            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md hover:shadow-lg transition">
                 <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">13:00</div>
                 <div>
                     <h3 class="text-2xl font-medium">Роспись в Митинском ЗАГСе</h3>
                     <a href="https://yandex.ru/maps/org/mitinskiy_dvorets_brakosochetaniya/38839858297/" target="_blank" class="inline-flex items-center gap-2 mt-3 text-[#d4a5b8] hover:underline"><i class="fa-solid fa-map-marker-alt"></i> Открыть на Яндекс.Картах</a>
                 </div>
             </div>
-            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md hover:shadow-lg transition">
                 <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">16:00</div>
                 <div>
                     <h3 class="text-2xl font-medium">Фуршет в Усадьбе Шелепаново</h3>
@@ -155,11 +155,11 @@
                     <a href="https://yandex.ru/maps/org/usadba_shelepanovo/12791297215/" target="_blank" class="inline-flex items-center gap-2 mt-4 text-[#d4a5b8] hover:underline"><i class="fa-solid fa-map-marker-alt"></i> Открыть на Яндекс.Картах</a>
                 </div>
             </div>
-            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md hover:shadow-lg transition">
                 <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">17:00</div>
                 <div><h3 class="text-2xl font-medium">Праздничный банкет</h3></div>
             </div>
-            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md hover:shadow-lg transition">
                 <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">22:30</div>
                 <div><h3 class="text-2xl font-medium">Завершение вечера</h3></div>
             </div>
@@ -410,12 +410,10 @@
                 try {
                     await fetch(SERVER_URL, {
                         method: 'POST',
-                        mode: 'no-cors', // обход CORS
+                        mode: 'no-cors',
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: encodedData
                     });
-                    // В режиме no-cors ответ недоступен, но запрос уходит.
-                    // Считаем отправку успешной.
                     return { success: true };
                 } catch (error) {
                     console.error('Ошибка:', error);
@@ -441,14 +439,24 @@
                 submitBtn.textContent = 'Отправить ответ';
 
                 if (result.success) {
-                    container.innerHTML = `
+                    // Разные сообщения в зависимости от ответа
+                    const isAttending = formData.attending === 'yes';
+                    const thankYouHtml = isAttending ? `
                         <div id="thank-you-message" class="text-center py-16 px-4">
                             <div class="text-7xl mb-6 animate-bounce">❤️</div>
                             <h2 class="heading-font text-5xl mb-4 text-[#d4a5b8]">Спасибо, ${formData.name}!</h2>
                             <p class="text-2xl text-gray-700 mb-4">Ваш ответ успешно отправлен</p>
                             <p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>
                         </div>
+                    ` : `
+                        <div id="thank-you-message" class="text-center py-16 px-4">
+                            <div class="text-7xl mb-6">🌸</div>
+                            <h2 class="heading-font text-5xl mb-4 text-[#d4a5b8]">Спасибо, ${formData.name}!</h2>
+                            <p class="text-2xl text-gray-700 mb-4">Ваш ответ успешно отправлен</p>
+                            <p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>
+                        </div>
                     `;
+                    container.innerHTML = thankYouHtml;
                     const thankDiv = document.getElementById('thank-you-message');
                     if (thankDiv) setTimeout(() => thankDiv.classList.add('show'), 20);
                 } else {
