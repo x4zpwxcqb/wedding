@@ -63,7 +63,7 @@
             background: #d4a5b8;
         }
 
-        /* Улучшенная навигация */
+        /* Навигация */
         nav {
             padding: 12px 0;
         }
@@ -71,7 +71,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: nowrap;
             gap: 12px;
         }
         nav .nav-title {
@@ -86,9 +85,9 @@
         }
         nav .menu-items {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             overflow-x: auto;
-            padding-bottom: 4px;
+            padding: 0 28px 4px 8px;   /* отступы для стрелок */
             scrollbar-width: none;
             white-space: nowrap;
         }
@@ -100,24 +99,20 @@
             font-size: 0.95rem;
         }
 
-        /* Стрелочки для прокрутки */
+        /* Стрелочки */
         .scroll-hint {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             color: #d4a5b8;
+            opacity: 0.6;
             pointer-events: none;
             z-index: 10;
-            animation: pulse 2s infinite;
+            transition: opacity 0.3s;
         }
-        .scroll-hint.left  { left: 4px; }
-        .scroll-hint.right { right: 4px; }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
+        .scroll-hint.left  { left: 2px; }
+        .scroll-hint.right { right: 2px; }
 
         html { scroll-behavior: smooth; }
     </style>
@@ -131,7 +126,7 @@
 
 <!-- HERO СЕКЦИЯ -->
 <header class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-    <!-- Эмодзи (оставлены без изменений) -->
+    <!-- Эмодзи (без изменений) -->
     <div class="absolute top-6 left-6 text-4xl flower z-10" style="animation-delay: 0.1s;">🌸</div>
     <div class="absolute top-8 left-1/4 text-3xl flower z-10" style="animation-delay: 1.6s;">✨</div>
     <div class="absolute top-5 left-1/2 text-2xl flower z-10" style="animation-delay: 2.9s;">💫</div>
@@ -192,7 +187,7 @@
     </div>
 </header>
 
-<!-- НАВИГАЦИЯ С СТРЕЛОЧКАМИ -->
+<!-- НАВИГАЦИЯ С ИСПРАВЛЕННЫМИ СТРЕЛОЧКАМИ -->
 <nav class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-pink-100">
     <div class="max-w-6xl mx-auto px-4 py-3.5 nav-container">
         <div class="flex items-center gap-2 flex-shrink-0">
@@ -396,7 +391,7 @@
         isPlaying = !isPlaying;
     }
 
-    // Таймер и форма
+    // Таймер и форма (без изменений)
     (function() {
         function startCountdown() {
             const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
