@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Никита & Эльвина • 14.08.2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #fce7f3; }
+        .heading-font { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em; }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%), 
+                        url('https://picsum.photos/id/104/2000/1300') center/cover no-repeat;
+            background-color: #f9d8e8;
+        }
+        
+        .main-bg {
+            background-color: #fef6f9;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(249, 168, 212, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 70%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 85%, rgba(180, 83, 120, 0.05) 0%, transparent 40%);
+        }
+        
+        .countdown-box {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+            border-radius: 2rem;
+        }
+        
+        .flower { animation: float 5s ease-in-out infinite; will-change: transform; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(2deg); }
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        .question-block { margin-bottom: 2rem; transition: all 0.2s; }
+        
+        .color-swatch {
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .color-swatch:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 18px 28px -8px rgba(0,0,0,0.15);
+        }
+
+        #thank-you-message {
+            opacity: 0;
+            transform: scale(0.96);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        #thank-you-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .checkbox-card {
+            transition: all 0.2s;
+        }
+        .checkbox-card:hover {
+            border-color: #d4a5b8;
+            background-color: #fef2f6;
+        }
+        .btn-primary:active { transform: scale(0.97); }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="main-bg text-gray-800">
+
+    <!-- HERO СЕКЦИЯ -->
+    <header class="hero-bg h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <div class="absolute top-8 left-8 text-6xl flower">🌸</div>
+        <div class="absolute top-16 right-12 text-5xl flower" style="animation-delay: 0.6s;">💐</div>
+        <div class="absolute bottom-28 left-1/4 text-7xl flower" style="animation-delay: 1.2s;">💍</div>
+        <div class="absolute bottom-16 right-1/3 text-6xl flower" style="animation-delay: 2.1s;">❤️</div>
+        <div class="absolute top-1/3 left-1/3 text-5xl flower" style="animation-delay: 0.4s;">🕊️</div>
+        <div class="absolute top-2/3 right-1/4 text-6xl flower" style="animation-delay: 2.8s;">💕</div>
+        <div class="absolute bottom-1/4 left-12 text-5xl flower" style="animation-delay: 1.7s;">🌷</div>
+        <div class="absolute top-1/4 right-8 text-4xl flower" style="animation-delay: 3.2s;">🥂</div>
+        <div class="absolute top-1/2 left-10 text-6xl flower" style="animation-delay: 1.9s;">🌺</div>
+        <div class="absolute bottom-1/3 right-20 text-5xl flower" style="animation-delay: 0.9s;">💖</div>
+        <div class="absolute top-20 left-1/3 text-4xl flower" style="animation-delay: 2.5s;">✨</div>
+
+        <div class="text-center z-10 px-6 max-w-4xl mx-auto">
+            <h1 class="heading-font text-7xl md:text-8xl mb-4 drop-shadow-sm">Никита <span class="text-[#fbc4d4]">&amp;</span> Эльвина</h1>
+            <p class="text-4xl font-light mb-12 tracking-wide">14 августа 2026</p>
+
+            <div class="countdown-box mx-auto max-w-lg rounded-3xl p-10 mb-12">
+                <p class="uppercase text-[#b56786] text-sm tracking-[0.2em] font-semibold mb-6">До свадьбы осталось</p>
+                <div id="countdown" class="grid grid-cols-4 gap-6 text-center">
+                    <div><div id="days" class="text-6xl font-bold text-gray-900 heading-font">000</div><div class="text-xs text-gray-500 mt-1">дней</div></div>
+                    <div><div id="hours" class="text-6xl font-bold text-gray-900 heading-font">00</div><div class="text-xs text-gray-500 mt-1">часов</div></div>
+                    <div><div id="minutes" class="text-6xl font-bold text-gray-900 heading-font">00</div><div class="text-xs text-gray-500 mt-1">минут</div></div>
+                    <div><div id="seconds" class="text-6xl font-bold text-gray-900 heading-font">00</div><div class="text-xs text-gray-500 mt-1">секунд</div></div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-5">
+                <a href="#schedule" class="inline-block bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-[#d4a5b8] hover:text-white transition-all px-8 py-4 rounded-2xl text-lg font-medium flex items-center gap-2 shadow-md"><i class="fa-solid fa-calendar"></i> Расписание</a>
+                <a href="#dresscode" class="inline-block bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-[#d4a5b8] hover:text-white transition-all px-8 py-4 rounded-2xl text-lg font-medium flex items-center gap-2 shadow-md"><i class="fa-solid fa-shirt"></i> Дресс-код</a>
+                <a href="#gifts" class="inline-block bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-[#d4a5b8] hover:text-white transition-all px-8 py-4 rounded-2xl text-lg font-medium flex items-center gap-2 shadow-md"><i class="fa-solid fa-gift"></i> Подарки</a>
+                <a href="#rsvp" class="inline-block bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-[#d4a5b8] hover:text-white transition-all px-8 py-4 rounded-2xl text-lg font-medium flex items-center gap-2 shadow-md"><i class="fa-solid fa-check-circle"></i> Подтвердить участие</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-pink-100">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">💍</span>
+                <span class="heading-font text-2xl tracking-tight">Никита &amp; Эльвина</span>
+            </div>
+            <div class="flex gap-6 text-sm font-medium">
+                <a href="#schedule" class="hover:text-[#d4a5b8] transition-colors">Расписание</a>
+                <a href="#dresscode" class="hover:text-[#d4a5b8] transition-colors">Дресс-код</a>
+                <a href="#gifts" class="hover:text-[#d4a5b8] transition-colors">Подарки</a>
+                <a href="#rsvp" class="hover:text-[#d4a5b8] transition-colors">Анкета</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- РАСПИСАНИЕ ДНЯ -->
+    <section id="schedule" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <h2 class="heading-font text-5xl mb-3">Программа дня</h2>
+            <p class="text-gray-600 text-lg">14 августа 2026 · Москва & Подмосковье</p>
+        </div>
+        <div class="space-y-6">
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md hover:shadow-lg transition">
+                <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">12:30</div>
+                <div><h3 class="text-2xl font-medium">Сбор гостей (рекомендуем приехать за 30 минут до церемонии)</h3></div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+                <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">13:00</div>
+                <div>
+                    <h3 class="text-2xl font-medium">Роспись в Митинском ЗАГСе</h3>
+                    <a href="https://yandex.ru/maps/org/mitinskiy_dvorets_brakosochetaniya/38839858297/" target="_blank" class="inline-flex items-center gap-2 mt-3 text-[#d4a5b8] hover:underline"><i class="fa-solid fa-map-marker-alt"></i> Открыть на Яндекс.Картах</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+                <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">16:00</div>
+                <div>
+                    <h3 class="text-2xl font-medium">Фуршет в Усадьбе Шелепаново</h3>
+                    <p class="text-gray-600 mt-1">Московская область, городской округ Солнечногорск, д. Шелепаново</p>
+                    <a href="https://yandex.ru/maps/org/usadba_shelepanovo/12791297215/" target="_blank" class="inline-flex items-center gap-2 mt-4 text-[#d4a5b8] hover:underline"><i class="fa-solid fa-map-marker-alt"></i> Открыть на Яндекс.Картах</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+                <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">17:00</div>
+                <div><h3 class="text-2xl font-medium">Праздничный банкет</h3></div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-start shadow-md">
+                <div class="text-4xl font-bold text-[#d4a5b8] w-28 flex-shrink-0">22:30</div>
+                <div><h3 class="text-2xl font-medium">Завершение вечера</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ДРЕСС-КОД -->
+    <section id="dresscode" class="bg-white/80 py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-5xl mb-6">Дресс-код</h2>
+                <p class="max-w-lg mx-auto text-gray-600 text-lg">Нежные оттенки, романтичная атмосфера. Выбирайте светлые пастельные тона.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+                <div class="text-center"><div class="color-swatch h-40 rounded-3xl flex items-center justify-center text-5xl" style="background-color: #b0c964;">🍃</div><p class="mt-3 font-medium">Светло-зелёный</p></div>
+                <div class="text-center"><div class="color-swatch h-40 rounded-3xl flex items-center justify-center text-5xl" style="background-color: #fce7f3;">🌸</div><p class="mt-3 font-medium">Нежно-розовый</p></div>
+                <div class="text-center"><div class="color-swatch h-40 rounded-3xl flex items-center justify-center text-5xl" style="background-color: #f8e483;">🌼</div><p class="mt-3 font-medium">Светло-жёлтый</p></div>
+                <div class="text-center"><div class="color-swatch h-40 rounded-3xl flex items-center justify-center text-5xl" style="background-color: #f2a988;">🧡</div><p class="mt-3 font-medium">Персиковый</p></div>
+                <div class="text-center"><div class="color-swatch h-40 rounded-3xl flex items-center justify-center text-5xl" style="background-color: #b0cbe8;">💙</div><p class="mt-3 font-medium">Небесно-голубой</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДАРКИ -->
+    <section id="gifts" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7">
+                <h2 class="heading-font text-5xl mb-8">Подарки и пожелания</h2>
+                <div class="text-lg leading-relaxed text-gray-700 space-y-5">
+                    <p>Самый ценный подарок для нас — ваше присутствие и тёплые слова в этот особенный день.</p>
+                    <p>Мы очень ценим Вашу заботу, внимание и будем рады любому подарку! И не важно, в какой конверт Вы его упакуете :)</p>
+                    <p class="font-medium">Просим не дарить цветы — нам будет гораздо приятнее получить ваши искренние пожелания и улыбки.</p>
+                </div>
+            </div>
+            <div class="md:col-span-5">
+                <img src="https://static.tildacdn.com/tild3562-6231-4330-a638-636131306264/1688291459_05cbb0.jpg" 
+                     alt="Свадебные конверты" class="rounded-3xl shadow-2xl w-full object-cover h-80">
+            </div>
+        </div>
+    </section>
+
+    <!-- АНКЕТА ПОДТВЕРЖДЕНИЯ -->
+    <section id="rsvp" class="py-20 bg-gradient-to-b from-[#f8f1f3] to-[#fce7f3]">
+        <div class="max-w-2xl mx-auto px-6">
+            <div id="rsvp-container" class="bg-white rounded-3xl shadow-2xl p-8 md:p-10 transition-all duration-300">
+                <h2 class="heading-font text-5xl text-center mb-3">Подтвердите участие</h2>
+                <p class="text-center text-gray-500 mb-8">Пожалуйста, ответьте до 1 мая 2026</p>
+                
+                <form id="rsvp-form" class="space-y-8">
+                    <div class="question-block">
+                        <label class="block text-sm font-semibold mb-2">Как вас зовут? <span class="text-red-500">*</span></label>
+                        <input type="text" id="guest-name" required 
+                               class="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#d4a5b8] focus:ring-2 focus:ring-[#d4a5b8]/20 transition" 
+                               placeholder="Имя и фамилия">
+                    </div>
+
+                    <div class="question-block">
+                        <label class="block text-sm font-semibold mb-3">Вы придёте на нашу свадьбу? <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending" value="yes" class="hidden peer">
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-5 text-center text-lg font-medium transition-all">Да, с удовольствием! 💕</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending" value="no" class="hidden peer">
+                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-5 text-center text-lg font-medium transition-all">К сожалению, нет 😔</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="extra-questions-wrapper" style="display: none;" class="space-y-8 transition-all">
+                        <div class="question-block">
+                            <label class="block text-sm font-semibold mb-3">Вам потребуется трансфер? <span class="text-red-500">*</span></label>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card transition">
+                                    <input type="checkbox" name="transfer" value="Нет, доберусь самостоятельно" class="w-5 h-5 accent-[#d4a5b8]"> 
+                                    <span>Нет, доберусь самостоятельно</span>
+                                </label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card transition">
+                                    <input type="checkbox" name="transfer" value="От ЗАГСа до Усадьбы" class="w-5 h-5 accent-[#d4a5b8]"> 
+                                    <span>От ЗАГСа до Усадьбы Шелепаново</span>
+                                </label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card transition">
+                                    <input type="checkbox" name="transfer" value="От Усадьбы до метро" class="w-5 h-5 accent-[#d4a5b8]"> 
+                                    <span>От Усадьбы до метро</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question-block">
+                            <label class="block text-sm font-semibold mb-3">Какой алкоголь вы предпочитаете? (можно выбрать несколько) <span class="text-red-500">*</span></label>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Все равно / без предпочтений" class="w-5 h-5 accent-[#d4a5b8]"> <span>Все равно / без предпочтений</span></label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Шампанское / игристое" class="w-5 h-5 accent-[#d4a5b8]"> <span>Шампанское / игристое</span></label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Вино красное / белое" class="w-5 h-5 accent-[#d4a5b8]"> <span>Вино красное / белое</span></label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Водка / самогон" class="w-5 h-5 accent-[#d4a5b8]"> <span>Водка / самогон</span></label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Виски / коньяк" class="w-5 h-5 accent-[#d4a5b8]"> <span>Виски / коньяк</span></label>
+                                <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Не употребляю алкоголь" class="w-5 h-5 accent-[#d4a5b8]"> <span>Не употребляю алкоголь</span></label>
+                            </div>
+                        </div>
+
+                        <div class="question-block">
+                            <label class="block text-sm font-semibold mb-2">Есть ли у вас аллергия или непереносимость продуктов? <span class="text-red-500">*</span></label>
+                            <textarea id="allergy-text" rows="3" class="w-full px-6 py-4 border rounded-2xl focus:outline-none focus:border-[#d4a5b8]" placeholder="Напишите, если есть аллергия / предпочтения, или укажите 'Нет'"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-rsvp-btn" disabled
+                            class="w-full bg-[#d4a5b8] hover:bg-[#bb7f9b] text-white py-5 rounded-3xl text-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md btn-primary">
+                        Отправить ответ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-[#d4a5b8] text-white py-10 text-center">
+        <p class="text-lg">По всем вопросам обращайтесь к организатору — Виктории<br>
+        Telegram: <a href="https://t.me/Viktoriumra" target="_blank" class="underline font-medium">@Viktoriumra</a></p>
+    </div>
+
+    <script>
+        (function() {
+            // Таймер
+            function startCountdown() {
+                const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = weddingDate - now;
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        document.getElementById('days').textContent = '000';
+                        document.getElementById('hours').textContent = '00';
+                        document.getElementById('minutes').textContent = '00';
+                        document.getElementById('seconds').textContent = '00';
+                        return;
+                    }
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    document.getElementById('days').textContent = String(days).padStart(3, '0');
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                }, 1000);
+            }
+            startCountdown();
+
+            // DOM элементы
+            const nameInput = document.getElementById('guest-name');
+            const attendingRadios = document.querySelectorAll('input[name="attending"]');
+            const extraWrapper = document.getElementById('extra-questions-wrapper');
+            const submitBtn = document.getElementById('submit-rsvp-btn');
+            const form = document.getElementById('rsvp-form');
+            const container = document.getElementById('rsvp-container');
+
+            const transferChecks = () => document.querySelectorAll('input[name="transfer"]');
+            const alcoholChecks = () => document.querySelectorAll('input[name="alcohol"]');
+            const allergyTextarea = document.getElementById('allergy-text');
+
+            function validateForm() {
+                const name = nameInput.value.trim();
+                let attendingValue = null;
+                for (let radio of attendingRadios) if (radio.checked) { attendingValue = radio.value; break; }
+                if (!attendingValue) { submitBtn.disabled = true; return; }
+                if (attendingValue === 'no') { submitBtn.disabled = (name === ''); return; }
+                if (attendingValue === 'yes') {
+                    let transferSelected = false; transferChecks().forEach(cb => { if (cb.checked) transferSelected = true; });
+                    let alcoholSelected = false; alcoholChecks().forEach(cb => { if (cb.checked) alcoholSelected = true; });
+                    const allergyFilled = allergyTextarea.value.trim() !== '';
+                    submitBtn.disabled = !(name !== '' && transferSelected && alcoholSelected && allergyFilled);
+                }
+            }
+            
+            function toggleExtraFields() {
+                let selected = null;
+                for (let radio of attendingRadios) if (radio.checked) { selected = radio.value; break; }
+                if (selected === 'yes') {
+                    extraWrapper.style.display = 'block';
+                    transferChecks().forEach(cb => cb.removeAttribute('disabled'));
+                    alcoholChecks().forEach(cb => cb.removeAttribute('disabled'));
+                    allergyTextarea.removeAttribute('disabled');
+                } else if (selected === 'no') {
+                    extraWrapper.style.display = 'none';
+                    transferChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
+                    alcoholChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
+                    allergyTextarea.value = '';
+                    allergyTextarea.setAttribute('disabled', 'disabled');
+                } else {
+                    extraWrapper.style.display = 'none';
+                }
+                validateForm();
+            }
+            
+            nameInput.addEventListener('input', validateForm);
+            attendingRadios.forEach(radio => radio.addEventListener('change', () => { toggleExtraFields(); validateForm(); }));
+            
+            function bindDynamicValidation() {
+                transferChecks().forEach(cb => cb.addEventListener('change', validateForm));
+                alcoholChecks().forEach(cb => cb.addEventListener('change', validateForm));
+                if (allergyTextarea) allergyTextarea.addEventListener('input', validateForm);
+            }
+            
+            function initForm() {
+                extraWrapper.style.display = 'none';
+                transferChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
+                alcoholChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
+                if (allergyTextarea) { allergyTextarea.value = ''; allergyTextarea.setAttribute('disabled', 'disabled'); }
+                bindDynamicValidation();
+                validateForm();
+            }
+            initForm();
+
+            // ----- ФУНКЦИИ ОТПРАВКИ НА GOOGLE APPS SCRIPT (CORS обход через mode: 'no-cors') -----
+            function collectFormData() {
+                const name = nameInput.value.trim();
+                const attendingRadio = document.querySelector('input[name="attending"]:checked');
+                const attending = attendingRadio ? attendingRadio.value : null;
+
+                const data = {
+                    name: name,
+                    attending: attending
+                };
+
+                if (attending === 'yes') {
+                    const transfer = Array.from(document.querySelectorAll('input[name="transfer"]:checked')).map(cb => cb.value);
+                    const alcohol = Array.from(document.querySelectorAll('input[name="alcohol"]:checked')).map(cb => cb.value);
+                    const allergies = allergyTextarea.value.trim();
+
+                    data.transfer = JSON.stringify(transfer);
+                    data.alcohol = JSON.stringify(alcohol);
+                    data.allergies = allergies || 'Не указано';
+                } else if (attending === 'no') {
+                    data.transfer = '';
+                    data.alcohol = '';
+                    data.allergies = '';
+                }
+                return data;
+            }
+
+            async function sendToTelegram(formData) {
+                // ЗАМЕНИТЕ ЭТОТ URL НА СВОЙ (из Google Apps Script)
+                const SERVER_URL = 'https://script.google.com/macros/s/AKfycbx7DeFFoIDBTlyLM5UdZ36WPs4Z8PS44MgxnzJBclv0TMzO8kIymE2Gek3CEyN3fc-OZQ/exec';
+
+                const encodedData = new URLSearchParams(formData).toString();
+
+                try {
+                    await fetch(SERVER_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // обход CORS
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: encodedData
+                    });
+                    // В режиме no-cors ответ недоступен, но запрос уходит.
+                    // Считаем отправку успешной.
+                    return { success: true };
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    return { success: false, error: error.message };
+                }
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                if (submitBtn.disabled) return;
+
+                const formData = collectFormData();
+                if (!formData.name || !formData.attending) {
+                    alert('Пожалуйста, заполните имя и выберите, будете ли вы на свадьбе.');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Отправляем...';
+
+                const result = await sendToTelegram(formData);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить ответ';
+
+                if (result.success) {
+                    container.innerHTML = `
+                        <div id="thank-you-message" class="text-center py-16 px-4">
+                            <div class="text-7xl mb-6 animate-bounce">❤️</div>
+                            <h2 class="heading-font text-5xl mb-4 text-[#d4a5b8]">Спасибо, ${formData.name}!</h2>
+                            <p class="text-2xl text-gray-700 mb-4">Ваш ответ успешно отправлен</p>
+                            <p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>
+                        </div>
+                    `;
+                    const thankDiv = document.getElementById('thank-you-message');
+                    if (thankDiv) setTimeout(() => thankDiv.classList.add('show'), 20);
+                } else {
+                    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз или свяжитесь с организатором.');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
