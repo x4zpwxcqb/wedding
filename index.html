@@ -111,6 +111,19 @@
         .scroll-hint.right { right: 4px; }
 
         html { scroll-behavior: smooth; }
+
+        /* Плавное появление/исчезновение дополнительных вопросов */
+        #extra-questions-wrapper {
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+        }
+        #extra-questions-wrapper.show {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
     </style>
 </head>
 <body class="main-bg text-gray-800">
@@ -311,7 +324,7 @@
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="attending" value="no" class="hidden peer">
-                            <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-5 text-center text-base font-medium transition-all">К сожалению, нет 😔</div>
+                            <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-5 text-center text-base font-medium transition-all">К сожалению, нет 😔</div>
                         </label>
                     </div>
                 </div>
@@ -329,7 +342,7 @@
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="attending_buyout" value="no" class="hidden peer">
-                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
                             </label>
                         </div>
                     </div>
@@ -343,7 +356,7 @@
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="attending_zags" value="no" class="hidden peer">
-                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
                             </label>
                         </div>
                     </div>
@@ -357,7 +370,7 @@
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="attending_banquet" value="no" class="hidden peer">
-                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
                             </label>
                         </div>
                     </div>
@@ -520,14 +533,24 @@
             for (let radio of attendingRadios) if (radio.checked) { selected = radio.value; break; }
             
             if (selected === 'yes') {
+                // Показываем блок плавно
                 extraWrapper.style.display = 'block';
+                // Небольшая задержка, чтобы добавить класс анимации
+                setTimeout(() => {
+                    extraWrapper.classList.add('show');
+                }, 10);
                 // Включаем все поля
                 document.querySelectorAll('#extra-questions-wrapper input, #extra-questions-wrapper textarea').forEach(el => {
                     el.removeAttribute('disabled');
                 });
             } else if (selected === 'no') {
-                extraWrapper.style.display = 'none';
-                // Сбрасываем и отключаем
+                // Сначала скрываем анимацию
+                extraWrapper.classList.remove('show');
+                // Ждём окончания анимации, затем скрываем display
+                setTimeout(() => {
+                    extraWrapper.style.display = 'none';
+                }, 300); // соответствует transition 0.3s
+                // Сбрасываем и отключаем поля
                 document.querySelectorAll('#extra-questions-wrapper input[type="radio"], #extra-questions-wrapper input[type="checkbox"]').forEach(el => {
                     el.checked = false;
                     el.setAttribute('disabled', 'disabled');
@@ -536,6 +559,7 @@
                 document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
             } else {
                 extraWrapper.style.display = 'none';
+                extraWrapper.classList.remove('show');
             }
             validateForm();
         }
@@ -559,6 +583,7 @@
      
         function initForm() {
             extraWrapper.style.display = 'none';
+            extraWrapper.classList.remove('show');
             document.querySelectorAll('#extra-questions-wrapper input').forEach(el => el.setAttribute('disabled', 'disabled'));
             document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
             bindDynamicValidation();
@@ -596,7 +621,7 @@
         }
 
         async function sendToTelegram(formData) {
-            const SERVER_URL = 'https://script.google.com/macros/s/AKfycbyTnG8uBQZq5L2ZmhCYORfLm5Svxc5y0xIXzYDEJ8AIwfatXZap1VdhRCitGyO6R5f3/exec';
+            const SERVER_URL = 'https://script.google.com/macros/s/AKfycby_Ce0nz4ZYmp-iCP5avCf_8EgZVKLHQWPfNQQQ_CbtCt7e6AaUbq6PjBdCm_KFyN3x/exec';
             const encodedData = new URLSearchParams(formData).toString();
             try {
                 await fetch(SERVER_URL, {
