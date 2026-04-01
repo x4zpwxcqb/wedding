@@ -112,17 +112,19 @@
 
         html { scroll-behavior: smooth; }
 
-        /* Плавное появление/исчезновение дополнительных вопросов */
+        /* Плавное раскрытие/сворачивание блока дополнительных вопросов */
         #extra-questions-wrapper {
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease, margin 0.3s ease, visibility 0.3s;
+            max-height: 0;
             opacity: 0;
-            transform: translateY(-10px);
-            visibility: hidden;
+            margin: 0 !important;
+            visibility: visible; /* не скрываем, чтобы анимация работала */
         }
-        #extra-questions-wrapper.show {
+        #extra-questions-wrapper.open {
+            max-height: 1500px; /* достаточно большое значение, чтобы вместить весь контент */
             opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
+            margin: 1.5rem 0 0 0; /* возвращаем отступ, который был в space-y-6 */
         }
     </style>
 </head>
@@ -330,7 +332,7 @@
                 </div>
 
                 <!-- Новые вопросы (появляются только при выборе "Да") -->
-                <div id="extra-questions-wrapper" style="display: none;" class="space-y-6 transition-all">
+                <div id="extra-questions-wrapper" class="space-y-6">
                     
                     <!-- Новые вопросы о присутствии -->
                     <div class="question-block">
@@ -534,32 +536,28 @@
             
             if (selected === 'yes') {
                 // Показываем блок плавно
-                extraWrapper.style.display = 'block';
-                // Небольшая задержка, чтобы добавить класс анимации
-                setTimeout(() => {
-                    extraWrapper.classList.add('show');
-                }, 10);
+                extraWrapper.classList.add('open');
                 // Включаем все поля
                 document.querySelectorAll('#extra-questions-wrapper input, #extra-questions-wrapper textarea').forEach(el => {
                     el.removeAttribute('disabled');
                 });
             } else if (selected === 'no') {
-                // Сначала скрываем анимацию
-                extraWrapper.classList.remove('show');
-                // Ждём окончания анимации, затем скрываем display
+                // Скрываем блок плавно
+                extraWrapper.classList.remove('open');
+                // После окончания анимации (0.4s) отключаем поля и сбрасываем значения
                 setTimeout(() => {
-                    extraWrapper.style.display = 'none';
-                }, 300); // соответствует transition 0.3s
-                // Сбрасываем и отключаем поля
-                document.querySelectorAll('#extra-questions-wrapper input[type="radio"], #extra-questions-wrapper input[type="checkbox"]').forEach(el => {
-                    el.checked = false;
-                    el.setAttribute('disabled', 'disabled');
-                });
-                document.getElementById('allergy-text').value = '';
-                document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
+                    // Сбрасываем и отключаем поля, но только если они всё ещё скрыты (не появились снова)
+                    if (!extraWrapper.classList.contains('open')) {
+                        document.querySelectorAll('#extra-questions-wrapper input[type="radio"], #extra-questions-wrapper input[type="checkbox"]').forEach(el => {
+                            el.checked = false;
+                            el.setAttribute('disabled', 'disabled');
+                        });
+                        document.getElementById('allergy-text').value = '';
+                        document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
+                    }
+                }, 400); // соответствует длительности transition max-height
             } else {
-                extraWrapper.style.display = 'none';
-                extraWrapper.classList.remove('show');
+                extraWrapper.classList.remove('open');
             }
             validateForm();
         }
@@ -582,8 +580,7 @@
         }
      
         function initForm() {
-            extraWrapper.style.display = 'none';
-            extraWrapper.classList.remove('show');
+            extraWrapper.classList.remove('open'); // закрыто
             document.querySelectorAll('#extra-questions-wrapper input').forEach(el => el.setAttribute('disabled', 'disabled'));
             document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
             bindDynamicValidation();
