@@ -40,7 +40,6 @@
             50% { transform: translateY(-12px) rotate(2deg); }
         }
 
-        /* Кнопка музыки */
         #music-btn {
             position: fixed;
             bottom: 20px;
@@ -63,7 +62,6 @@
             background: #d4a5b8;
         }
 
-        /* Навигация */
         nav {
             padding: 12px 0;
         }
@@ -87,7 +85,7 @@
             display: flex;
             gap: 18px;
             overflow-x: auto;
-            padding: 0 28px 4px 20px;   /* увеличен левый отступ */
+            padding: 0 28px 4px 20px;
             scrollbar-width: none;
             white-space: nowrap;
         }
@@ -99,7 +97,6 @@
             font-size: 0.95rem;
         }
 
-        /* Стрелочки — сильно сдвинута левая */
         .scroll-hint {
             position: absolute;
             top: 50%;
@@ -110,7 +107,7 @@
             pointer-events: none;
             z-index: 10;
         }
-        .scroll-hint.left  { left: -10px; }   /* сильно сдвинуто влево */
+        .scroll-hint.left  { left: -10px; }
         .scroll-hint.right { right: 4px; }
 
         html { scroll-behavior: smooth; }
@@ -125,7 +122,7 @@
 
 <!-- HERO СЕКЦИЯ -->
 <header class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-    <!-- Эмодзи -->
+    <!-- Эмодзи (оставлены без изменений) -->
     <div class="absolute top-6 left-6 text-4xl flower z-10" style="animation-delay: 0.1s;">🌸</div>
     <div class="absolute top-8 left-1/4 text-3xl flower z-10" style="animation-delay: 1.6s;">✨</div>
     <div class="absolute top-5 left-1/2 text-2xl flower z-10" style="animation-delay: 2.9s;">💫</div>
@@ -186,7 +183,7 @@
     </div>
 </header>
 
-<!-- НАВИГАЦИЯ С СИЛЬНО СДВИНУТОЙ ЛЕВОЙ СТРЕЛОЧКОЙ -->
+<!-- НАВИГАЦИЯ -->
 <nav class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-pink-100">
     <div class="max-w-6xl mx-auto px-4 py-3.5 nav-container">
         <div class="flex items-center gap-2 flex-shrink-0">
@@ -195,29 +192,37 @@
         </div>
         
         <div class="menu-wrapper relative flex-1">
-            <!-- Левая стрелочка — сильно сдвинута влево -->
             <div class="scroll-hint left">‹</div>
-            
             <div class="menu-items flex gap-5 text-sm font-medium whitespace-nowrap overflow-x-auto pb-1">
                 <a href="#schedule" class="hover:text-[#d4a5b8] transition-colors">Расписание</a>
                 <a href="#dresscode" class="hover:text-[#d4a5b8] transition-colors">Дресс-код</a>
                 <a href="#gifts" class="hover:text-[#d4a5b8] transition-colors">Подарки</a>
                 <a href="#rsvp" class="hover:text-[#d4a5b8] transition-colors">Анкета</a>
             </div>
-            
-            <!-- Правая стрелочка -->
             <div class="scroll-hint right">›</div>
         </div>
     </div>
 </nav>
 
-<!-- РАСПИСАНИЕ ДНЯ -->
+<!-- РАСПИСАНИЕ ДНЯ (с добавленным выкупом) -->
 <section id="schedule" class="max-w-6xl mx-auto px-4 py-12">
     <div class="text-center mb-10">
         <h2 class="heading-font text-4xl mb-2">Программа дня</h2>
         <p class="text-gray-600">14 августа 2026 · Москва & Подмосковье</p>
     </div>
     <div class="space-y-5">
+        <!-- Новый пункт -->
+        <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 shadow-md">
+            <div class="text-3xl font-bold text-[#d4a5b8]">10:00</div>
+            <div>
+                <h3 class="text-lg font-medium">Выкуп невесты</h3>
+                <a href="https://yandex.ru/maps/?text=г.%20Химки,%20ул.%20Совхозная,%20д.%2018" target="_blank" 
+                   class="inline-flex items-center gap-2 mt-3 text-[#d4a5b8] hover:underline text-sm">
+                    <i class="fa-solid fa-map-marker-alt"></i> Открыть на Яндекс.Картах
+                </a>
+            </div>
+        </div>
+
         <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 shadow-md">
             <div class="text-3xl font-bold text-[#d4a5b8]">12:30</div>
             <div><h3 class="text-lg font-medium">Сбор гостей (рекомендуем приехать за 30 минут до церемонии)</h3></div>
@@ -248,7 +253,7 @@
     </div>
 </section>
 
-<!-- ДРЕСС-КОД, ПОДАРКИ, АНКЕТА и футер — без изменений -->
+<!-- ДРЕСС-КОД -->
 <section id="dresscode" class="bg-white/80 py-12">
     <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-10">
@@ -266,6 +271,7 @@
     </div>
 </section>
 
+<!-- ПОДАРКИ -->
 <section id="gifts" class="max-w-6xl mx-auto px-4 py-12">
     <div class="grid gap-10">
         <div>
@@ -283,6 +289,7 @@
     </div>
 </section>
 
+<!-- АНКЕТА (с новыми вопросами) -->
 <section id="rsvp" class="py-12 bg-gradient-to-b from-[#f8f1f3] to-[#fce7f3]">
     <div class="max-w-lg mx-auto px-4">
         <div id="rsvp-container" class="bg-white rounded-3xl shadow-2xl p-8">
@@ -294,6 +301,7 @@
                     <label class="block text-sm font-semibold mb-2">Как вас зовут? <span class="text-red-500">*</span></label>
                     <input type="text" id="guest-name" required class="w-full px-5 py-3.5 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#d4a5b8]" placeholder="Имя и фамилия">
                 </div>
+
                 <div class="question-block">
                     <label class="block text-sm font-semibold mb-3">Вы придёте на нашу свадьбу? <span class="text-red-500">*</span></label>
                     <div class="grid grid-cols-2 gap-4">
@@ -307,14 +315,64 @@
                         </label>
                     </div>
                 </div>
+
+                <!-- Новые вопросы (появляются только при выборе "Да") -->
                 <div id="extra-questions-wrapper" style="display: none;" class="space-y-6 transition-all">
-                    <!-- трансфер, алкоголь, аллергия — без изменений -->
+                    
+                    <!-- Новые вопросы о присутствии -->
+                    <div class="question-block">
+                        <label class="block text-sm font-semibold mb-3">Вы будете присутствовать на выкупе? <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending_buyout" value="yes" class="hidden peer">
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-4 text-center text-base font-medium transition-all">Да</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending_buyout" value="no" class="hidden peer">
+                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-block">
+                        <label class="block text-sm font-semibold mb-3">Вы будете присутствовать в ЗАГСе? <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending_zags" value="yes" class="hidden peer">
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-4 text-center text-base font-medium transition-all">Да</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending_zags" value="no" class="hidden peer">
+                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-block">
+                        <label class="block text-sm font-semibold mb-3">Вы будете присутствовать на банкете? <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending_banquet" value="yes" class="hidden peer">
+                                <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-4 text-center text-base font-medium transition-all">Да</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="attending_banquet" value="no" class="hidden peer">
+                                <div class="peer-checked:bg-gray-400 peer-checked:text-white border-2 border-gray-300 rounded-2xl py-4 text-center text-base font-medium transition-all">Нет</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос про трансфер (с новым вариантом) -->
                     <div class="question-block">
                         <label class="block text-sm font-semibold mb-3">Вам потребуется трансфер? <span class="text-red-500">*</span></label>
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card transition">
                                 <input type="checkbox" name="transfer" value="Нет, доберусь самостоятельно" class="w-5 h-5 accent-[#d4a5b8]">
                                 <span class="text-sm">Нет, доберусь самостоятельно</span>
+                            </label>
+                            <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card transition">
+                                <input type="checkbox" name="transfer" value="От места выкупа до ЗАГСа" class="w-5 h-5 accent-[#d4a5b8]">
+                                <span class="text-sm">От места выкупа до ЗАГСа</span>
                             </label>
                             <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card transition">
                                 <input type="checkbox" name="transfer" value="От ЗАГСа до Усадьбы" class="w-5 h-5 accent-[#d4a5b8]">
@@ -326,6 +384,8 @@
                             </label>
                         </div>
                     </div>
+
+                    <!-- Остальные вопросы без изменений -->
                     <div class="question-block">
                         <label class="block text-sm font-semibold mb-3">Какой алкоголь вы предпочитаете? (можно выбрать несколько) <span class="text-red-500">*</span></label>
                         <div class="space-y-3">
@@ -337,11 +397,13 @@
                             <label class="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer checkbox-card"><input type="checkbox" name="alcohol" value="Не употребляю алкоголь" class="w-5 h-5 accent-[#d4a5b8]"> <span class="text-sm">Не употребляю алкоголь</span></label>
                         </div>
                     </div>
+
                     <div class="question-block">
                         <label class="block text-sm font-semibold mb-2">Есть ли у вас аллергия или непереносимость продуктов? <span class="text-red-500">*</span></label>
                         <textarea id="allergy-text" rows="3" class="w-full px-5 py-3.5 border rounded-2xl focus:outline-none focus:border-[#d4a5b8]" placeholder="Напишите, если есть аллергия / предпочтения, или укажите 'Нет'"></textarea>
                     </div>
                 </div>
+
                 <button type="submit" id="submit-rsvp-btn" disabled class="w-full bg-[#d4a5b8] hover:bg-[#bb7f9b] text-white py-4 rounded-3xl text-lg font-medium transition-all disabled:opacity-50">
                     Отправить ответ
                 </button>
@@ -389,7 +451,7 @@
         isPlaying = !isPlaying;
     }
 
-    // Таймер и форма (без изменений)
+    // Таймер и форма
     (function() {
         function startCountdown() {
             const weddingDate = new Date('2026-08-14T13:00:00+03:00').getTime();
@@ -418,38 +480,60 @@
         const submitBtn = document.getElementById('submit-rsvp-btn');
         const form = document.getElementById('rsvp-form');
         const container = document.getElementById('rsvp-container');
-        const transferChecks = () => document.querySelectorAll('input[name="transfer"]');
-        const alcoholChecks = () => document.querySelectorAll('input[name="alcohol"]');
-        const allergyTextarea = document.getElementById('allergy-text');
 
         function validateForm() {
             const name = nameInput.value.trim();
             let attendingValue = null;
             for (let radio of attendingRadios) if (radio.checked) { attendingValue = radio.value; break; }
-            if (!attendingValue) { submitBtn.disabled = true; return; }
-            if (attendingValue === 'no') { submitBtn.disabled = (name === ''); return; }
+            
+            if (!attendingValue) { 
+                submitBtn.disabled = true; 
+                return; 
+            }
+            
+            if (attendingValue === 'no') { 
+                submitBtn.disabled = (name === ''); 
+                return; 
+            }
+            
             if (attendingValue === 'yes') {
-                let transferSelected = false; transferChecks().forEach(cb => { if (cb.checked) transferSelected = true; });
-                let alcoholSelected = false; alcoholChecks().forEach(cb => { if (cb.checked) alcoholSelected = true; });
-                const allergyFilled = allergyTextarea.value.trim() !== '';
-                submitBtn.disabled = !(name !== '' && transferSelected && alcoholSelected && allergyFilled);
+                const buyout = document.querySelector('input[name="attending_buyout"]:checked');
+                const zags = document.querySelector('input[name="attending_zags"]:checked');
+                const banquet = document.querySelector('input[name="attending_banquet"]:checked');
+                
+                let transferSelected = false;
+                document.querySelectorAll('input[name="transfer"]:checked').forEach(cb => { transferSelected = true; });
+                
+                let alcoholSelected = false;
+                document.querySelectorAll('input[name="alcohol"]:checked').forEach(cb => { alcoholSelected = true; });
+                
+                const allergyFilled = document.getElementById('allergy-text').value.trim() !== '';
+                
+                submitBtn.disabled = !(name !== '' && 
+                                       buyout && zags && banquet && 
+                                       transferSelected && alcoholSelected && allergyFilled);
             }
         }
      
         function toggleExtraFields() {
             let selected = null;
             for (let radio of attendingRadios) if (radio.checked) { selected = radio.value; break; }
+            
             if (selected === 'yes') {
                 extraWrapper.style.display = 'block';
-                transferChecks().forEach(cb => cb.removeAttribute('disabled'));
-                alcoholChecks().forEach(cb => cb.removeAttribute('disabled'));
-                allergyTextarea.removeAttribute('disabled');
+                // Включаем все поля
+                document.querySelectorAll('#extra-questions-wrapper input, #extra-questions-wrapper textarea').forEach(el => {
+                    el.removeAttribute('disabled');
+                });
             } else if (selected === 'no') {
                 extraWrapper.style.display = 'none';
-                transferChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
-                alcoholChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
-                allergyTextarea.value = '';
-                allergyTextarea.setAttribute('disabled', 'disabled');
+                // Сбрасываем и отключаем
+                document.querySelectorAll('#extra-questions-wrapper input[type="radio"], #extra-questions-wrapper input[type="checkbox"]').forEach(el => {
+                    el.checked = false;
+                    el.setAttribute('disabled', 'disabled');
+                });
+                document.getElementById('allergy-text').value = '';
+                document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
             } else {
                 extraWrapper.style.display = 'none';
             }
@@ -457,19 +541,26 @@
         }
      
         nameInput.addEventListener('input', validateForm);
-        attendingRadios.forEach(radio => radio.addEventListener('change', () => { toggleExtraFields(); validateForm(); }));
-     
+        attendingRadios.forEach(radio => radio.addEventListener('change', () => { 
+            toggleExtraFields(); 
+            validateForm(); 
+        }));
+
+        // Динамическая валидация для новых радио-кнопок и чекбоксов
         function bindDynamicValidation() {
-            transferChecks().forEach(cb => cb.addEventListener('change', validateForm));
-            alcoholChecks().forEach(cb => cb.addEventListener('change', validateForm));
-            if (allergyTextarea) allergyTextarea.addEventListener('input', validateForm);
+            document.querySelectorAll('input[name="attending_buyout"], input[name="attending_zags"], input[name="attending_banquet"]').forEach(radio => {
+                radio.addEventListener('change', validateForm);
+            });
+            document.querySelectorAll('input[name="transfer"], input[name="alcohol"]').forEach(cb => {
+                cb.addEventListener('change', validateForm);
+            });
+            document.getElementById('allergy-text').addEventListener('input', validateForm);
         }
      
         function initForm() {
             extraWrapper.style.display = 'none';
-            transferChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
-            alcoholChecks().forEach(cb => { cb.checked = false; cb.setAttribute('disabled', 'disabled'); });
-            if (allergyTextarea) { allergyTextarea.value = ''; allergyTextarea.setAttribute('disabled', 'disabled'); }
+            document.querySelectorAll('#extra-questions-wrapper input').forEach(el => el.setAttribute('disabled', 'disabled'));
+            document.getElementById('allergy-text').setAttribute('disabled', 'disabled');
             bindDynamicValidation();
             validateForm();
         }
@@ -477,17 +568,26 @@
 
         function collectFormData() {
             const name = nameInput.value.trim();
-            const attendingRadio = document.querySelector('input[name="attending"]:checked');
-            const attending = attendingRadio ? attendingRadio.value : null;
+            const attending = document.querySelector('input[name="attending"]:checked')?.value || null;
+            
             const data = { name: name, attending: attending };
+            
             if (attending === 'yes') {
+                data.attending_buyout = document.querySelector('input[name="attending_buyout"]:checked')?.value || '';
+                data.attending_zags = document.querySelector('input[name="attending_zags"]:checked')?.value || '';
+                data.attending_banquet = document.querySelector('input[name="attending_banquet"]:checked')?.value || '';
+                
                 const transfer = Array.from(document.querySelectorAll('input[name="transfer"]:checked')).map(cb => cb.value);
                 const alcohol = Array.from(document.querySelectorAll('input[name="alcohol"]:checked')).map(cb => cb.value);
-                const allergies = allergyTextarea.value.trim();
+                const allergies = document.getElementById('allergy-text').value.trim();
+                
                 data.transfer = JSON.stringify(transfer);
                 data.alcohol = JSON.stringify(alcohol);
                 data.allergies = allergies || 'Не указано';
-            } else if (attending === 'no') {
+            } else {
+                data.attending_buyout = '';
+                data.attending_zags = '';
+                data.attending_banquet = '';
                 data.transfer = '';
                 data.alcohol = '';
                 data.allergies = '';
@@ -514,20 +614,26 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             if (submitBtn.disabled) return;
+            
             const formData = collectFormData();
             if (!formData.name || !formData.attending) {
                 alert('Пожалуйста, заполните имя и выберите, будете ли вы на свадьбе.');
                 return;
             }
+            
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправляем...';
+            
             const result = await sendToTelegram(formData);
+            
             submitBtn.disabled = false;
             submitBtn.textContent = 'Отправить ответ';
+            
             if (result.success) {
                 let messageText = formData.attending === 'yes'
                     ? `<p class="text-gray-500">Мы с нетерпением ждём встречи! 🌸</p>`
                     : `<p class="text-gray-500">Жаль, что не сможем разделить этот день вместе, но обязательно увидимся позже! 🌸</p>`;
+                
                 container.innerHTML = `
                     <div id="thank-you-message" class="text-center py-16 px-4">
                         <div class="text-7xl mb-6 animate-bounce">❤️</div>
@@ -536,8 +642,6 @@
                         ${messageText}
                     </div>
                 `;
-                const thankDiv = document.getElementById('thank-you-message');
-                if (thankDiv) setTimeout(() => thankDiv.classList.add('show'), 20);
             } else {
                 alert('Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз или свяжитесь с организатором.');
             }
