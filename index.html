@@ -10,7 +10,15 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
      
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #fce7f3; }
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            background-color: #fce7f3; 
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
         .heading-font { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em; }
      
         .hero-bg {
@@ -118,7 +126,7 @@
             overflow: hidden;
             max-height: 0;
             opacity: 0;
-            margin: 0 !important;
+            /* margin не обнуляем, чтобы при открытии отступ наследовался от space-y-6 */
         }
         .extra-questions-wrapper.open {
             max-height: 2200px;   /* достаточно для всего контента */
@@ -336,7 +344,6 @@
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="attending" value="no" class="hidden peer">
-                            <!-- теперь отрицательный вариант имеет розовую границу и розовую заливку при выборе -->
                             <div class="peer-checked:bg-[#d4a5b8] peer-checked:text-white border-2 border-[#d4a5b8] rounded-2xl py-5 text-center text-base font-medium transition-all">К сожалению, нет 😔</div>
                         </label>
                     </div>
@@ -544,11 +551,9 @@
             for (let radio of attendingRadios) if (radio.checked) { selected = radio.value; break; }
             
             if (selected === 'yes') {
-                // Сначала включаем поля, потом плавно раскрываем
                 disableExtraFields(false);
                 extraWrapper.classList.add('open');
             } else if (selected === 'no') {
-                // Плавно скрываем, а после анимации сбрасываем и отключаем
                 extraWrapper.classList.remove('open');
                 setTimeout(() => {
                     if (!extraWrapper.classList.contains('open')) {
